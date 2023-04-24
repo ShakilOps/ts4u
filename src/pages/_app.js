@@ -1,5 +1,17 @@
-import '@/styles/globals.css'
+import { Provider } from 'react-redux';
+import '../styles/globals.scss';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from '../store';
+
+function App({ Component, pageProps }) {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Component {...pageProps} />
+      </PersistGate>
+    </Provider>
+  );
 }
+
+export default App;
